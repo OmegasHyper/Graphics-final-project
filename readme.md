@@ -2,27 +2,6 @@
 
 ## A Blender-Based 3D Medical Emergency Training Visualization
 
----
-
-##  Table of Contents
-
-1. [Project Overview](#project-overview)
-2. [Team Members](#team-members)
-3. [Technical Specifications](#technical-specifications)
-4. [Virtual Environment](#virtual-environment)
-5. [Hero Objects](#hero-objects)
-6. [Character System](#character-system)
-7. [Emergency Scenarios](#emergency-scenarios)
-8. [Lighting & Rendering](#lighting--rendering)
-9. [Physics & Simulations](#physics--simulations)
-11. [Installation & Setup](#installation--setup)
-13. [Asset Credits](#asset-credits)
-14. [AI Tools Usage](#ai-tools-usage)
-15. [Future Enhancements](#future-enhancements)
-16. [License](#license)
-
----
-
 ## 🏥 Project Overview
 
 **Virtual Ambulance Emergency Response Simulation** is a comprehensive 3D visualization project developed as the final course project for **Computer Graphics and Visualization** (SBEG353/SBES140) at the **Spring 2025/2026** semester.
