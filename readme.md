@@ -197,7 +197,7 @@ Per the project specification, a team of six requires **three hero objects** (‚å
 
 | Character | Description | Attire |
 |-----------|-------------|--------|
-| **Receptionist** | Male, professional | Dark business suit with tie |
+| **Receptionist** | Male, professional | Dark, smooth long-sleeved sweater over a white collared shirt, paired with tight, high-gloss black pants. |
 | **Paramedic** | Emergency responder | White hazmat-style jumpsuit, blue gloves, medical vest |
 | **Patient** | Civilian casualty | White shirt, dark trousers |
 
