@@ -41,7 +41,7 @@ The project demonstrates practical application of core computer graphics concept
 
 ##  Team Members
 
-<img width="336" height="557" alt="image" src="https://github.com/user-attachments/assets/4e15fd05-ee5b-4c8a-96ca-98d978f640d5" />
+<img width="336" height="557" alt="image" src="assets/Screenshots/Contribution.png" />
 
 ---
 
