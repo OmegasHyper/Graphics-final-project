@@ -37,7 +37,14 @@ The simulation models a complete urban emergency medical response workflow, enco
 This project demonstrates the practical application of core computer graphics concepts including environment modeling, UV mapping, texture application, skeletal character animation, physics-based rendering, advanced lighting, and collision handling.
 
 👥 Team Members
-  
+
+| Member | Student ID | Contributions |
+|--------|------------|---------------|
+| **Jana Gamal Abdelzaher** | 91240240 | Virtual environment modeling (city block, roads, buildings); lighting setup for outdoor scenes |
+| **Maryam Hosney** | student_id2 | Hero object – ambulance vehicle: modeling, UV unwrapping, texture and material creation |
+| **Mohamed Hassan** | 9231261 | Hero object – stretcher; character rigging (paramedic and patient); stretcher-push animation |
+| **Hamdy** | student_id4 | Hospital interior modeling (hero object – reception desk); character animation (receptionist); fire/alarm lighting |
+| **Kareem Fareed Mohammed Abdelrazek** | student_id5 | Physics simulations (rigid-body collision, rain particle system); Cycles rendering, compositing, and video editing |
 
 ## ⚙️ Technical Specifications
 
@@ -54,12 +61,17 @@ This project demonstrates the practical application of core computer graphics co
 
 
 ---
-## The Final Video:
 
-<video width="700" controls>
-  <source src="Assets/video_2026-06-18_14-23-03.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+## 🎥 Final Video Showcase
+
+<div align="center">
+  <video width="800" controls>
+    <source src="./assets/videos/final_video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <br>
+  <sub><i>Complete Emergency Response Simulation - Click to watch</i></sub>
+</div>
 
 ---
 
@@ -160,7 +172,7 @@ A black classic car collides with a stopped vehicle at a fog-covered night inter
 - **Atmosphere:** Volumetric fog, particle-based rain and debris
 
 <div align="center">
-  <img src=".\Assests for readme\photo_2026-06-18_15-53-48.jpg" alt="Scenario 1 Preview" width="800"/>
+  <img src="./assets/screenshots/scenario-1-collision.jpg" alt="Scenario 1 Preview" width="800"/>
   <br>
   <sub><i>Traffic Collision and On-Scene Response</i></sub>
 </div>
@@ -171,6 +183,12 @@ Following the collision, the patient is loaded onto the stretcher and transporte
 - **Character-Object Interaction:** Paramedic's hands constrained to stretcher handle via IK targets
 - **Animation Sync:** Stretcher movement timed to match paramedic's walking pace
 - **Detail:** Ambulance rear doors remain open, showcasing interior modeling
+
+<div align="center">
+  <img src="./assets/screenshots/scenario-2-ambulance.jpg" alt="Scenario 2 Preview" width="800"/>
+  <br>
+  <sub><i>Patient Evacuation by Stretcher</i></sub>
+</div>
 
 
 ### Scenario 3: Hospital Arrival and Fire Emergency 🏨🔥
@@ -199,6 +217,12 @@ The ambulance arrives at the hospital, completing the emergency response chain. 
 - Dynamic scene transitions
 - Integration of multiple emergency response elements
 
+<div align="center">
+  <img src="./assets/screenshots/scenario-3-fire-emergency.jpg" alt="Scenario 3 Preview" width="800"/>
+  <br>
+  <sub><i>Hospital Arrival and Fire Emergency</i></sub>
+</div>
+
 ---
 
 ## 💡 Lighting & Rendering
@@ -214,7 +238,7 @@ All scenes were rendered using **Blender's Cycles path-tracing engine** with hig
 | **Spotlights** | Ambulance headlamps, rear floodlight | Cut-off: 30°, Penumbra: 5° |
 | **Emission Materials** | Light bar LEDs, neon signs | Self-illumination with controlled intensity |
 | **Volumetric Lighting** | Fire/alarm scenes | Red Volume Scatter medium inside building |
-]
+
 ---
 
 ## 🔬 Physics & Simulations
@@ -234,7 +258,7 @@ All scenes were rendered using **Blender's Cycles path-tracing engine** with hig
 - **Debris System:** 3,000 spark/debris objects from collision impact
 - **Initial Burst:** High velocity with drag
 
-### Fire Particle Syste (Scenario 3)
+### Fire Particle System (Scenario 3)
 - **Emitter:** Hospital roof surface
 - **Particle Count:** 5,000+ particles
 - **Motion:** Upward convection with turbulence
