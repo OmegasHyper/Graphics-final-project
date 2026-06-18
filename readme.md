@@ -38,19 +38,8 @@ The simulation models a complete urban emergency medical response workflow, enco
 
 This project demonstrates the practical application of core computer graphics concepts including environment modeling, UV mapping, texture application, skeletal character animation, physics-based rendering, advanced lighting, and collision handling.
 
----
-
-## 👥 Team Members
-
-| Member | Student ID | Contributions |
-|--------|------------|---------------|
-| **Jana Gamal Abdelzaher** | 91240240 | Virtual environment modeling (city block, roads, buildings); lighting setup for outdoor scenes |
-| **Maryam Hosney** | student_id2 | Hero object – ambulance vehicle: modeling, UV unwrapping, texture and material creation |
-| **Mohamed Hassan** | 9231261 | Hero object – stretcher; character rigging (paramedic and patient); stretcher-push animation |
-| **Hamdy** | student_id4 | Hospital interior modeling (hero object – reception desk); character animation (receptionist); fire/alarm lighting |
-| **Kareem Fareed Mohammed Abdelrazek** | student_id5 | Physics simulations (rigid-body collision, rain particle system); Cycles rendering, compositing, and video editing |
-
----
+👥 Team Members
+  
 
 ## ⚙️ Technical Specifications
 
@@ -64,6 +53,15 @@ This project demonstrates the practical application of core computer graphics co
 | **Simulation Rate** | 60 frames per second (physics) |
 | **Polygon Count** | ~15,000 triangles (ambulance) |
 | **Character Bones** | 65 bones per rig (including finger chains) |
+
+
+---
+## The Final Video:
+
+<video width="700" controls>
+  <source src="Assets/video_2026-06-18_14-23-03.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ---
 
@@ -164,7 +162,7 @@ A black classic car collides with a stopped vehicle at a fog-covered night inter
 - **Atmosphere:** Volumetric fog, particle-based rain and debris
 
 <div align="center">
-  <img src="./assets/screenshots/scenario-1-preview.png" alt="Scenario 1 Preview" width="800"/>
+  <img src=".\Assests for readme\photo_2026-06-18_15-53-48.jpg" alt="Scenario 1 Preview" width="800"/>
   <br>
   <sub><i>Traffic Collision and On-Scene Response</i></sub>
 </div>

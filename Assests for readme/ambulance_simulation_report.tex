@@ -1,0 +1,661 @@
+% ============================================================
+%  Virtual Ambulance Emergency Response Simulation
+%  Final Course Project Report — SBEG353 / SBES140
+%  Spring 2026 | Cairo University
+%  Two-column IEEE-style layout
+% ============================================================
+
+\documentclass[10pt, twocolumn]{article}
+
+% ── Packages ────────────────────────────────────────────────
+\usepackage[a4paper, top=2cm, bottom=2cm, left=1.5cm, right=1.5cm,
+            columnsep=0.6cm]{geometry}
+\usepackage{times}          % Times New Roman font
+\usepackage{graphicx}       % \includegraphics
+\usepackage{float}          % [H] figure placement
+\usepackage{caption}        % caption formatting
+\usepackage{subcaption}     % subfigures
+\usepackage{booktabs}       % professional tables
+\usepackage{amsmath}        % math
+\usepackage{hyperref}       % clickable links
+\usepackage{enumitem}       % list control
+\usepackage{titlesec}       % section title formatting
+\usepackage{fancyhdr}       % header / footer
+\usepackage{multicol}       % span columns when needed
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{parskip}
+\usepackage{microtype}
+
+% ── Caption style ───────────────────────────────────────────
+\captionsetup{font=small, labelfont=bf, skip=4pt}
+
+% ── Section formatting ──────────────────────────────────────
+\titleformat{\section}{\normalfont\large\bfseries}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\thesubsection.}{0.5em}{}
+\titlespacing*{\section}{0pt}{8pt}{4pt}
+\titlespacing*{\subsection}{0pt}{6pt}{3pt}
+
+% ── Header / Footer ─────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small SBEG353/SBES140 — Computer Graphics and Visualization, Spring 2026}
+\rhead{\small Cairo University}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ── Hyperref ────────────────────────────────────────────────
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+% ============================================================
+\begin{document}
+
+% ── Title block (full width) ────────────────────────────────
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \begin{center}
+      {\Large \textbf{Virtual Ambulance Emergency Response Simulation in Blender}} \\[6pt]
+      {\normalsize Final Course Project — SBEG353 / SBES140 | Spring 2025/2026} \\[4pt]
+      {\small
+        \textbf{Author 1}\textsuperscript{1},
+        \textbf{Author 2}\textsuperscript{1},
+        \textbf{Author 3}\textsuperscript{1},
+        \textbf{Author 4}\textsuperscript{1},
+        \textbf{Author 5}\textsuperscript{1} \\[2pt]
+        \textsuperscript{1}Systems and Biomedical Engineering Department,
+        Cairo University, Giza, Egypt \\[2pt]
+        \texttt{\{student\_id1, student\_id2, student\_id3,
+                  student\_id4, student\_id5\}@student.cu.edu.eg}
+      }
+    \end{center}
+    \vspace{6pt}
+    \hrule
+    \vspace{6pt}
+    % ── Abstract ──────────────────────────────────────────
+    \begin{center}
+      \textbf{Abstract}
+    \end{center}
+    \noindent
+    This report presents the design and implementation of a Virtual Ambulance
+    Emergency Response Simulation developed in Blender as the final project for
+    the Computer Graphics and Visualization course (SBEG353/SBES140).
+    The simulation models a realistic urban emergency medical response workflow,
+    encompassing a multi-scene virtual environment that includes city streets,
+    hospital interiors, and accident sites.
+    The project integrates core computer-graphics concepts, including
+    environment modelling, UV mapping, texture application, skeletal character
+    animation, physics-based rendering, advanced lighting, and collision handling.
+    Three distinct emergency-response scenarios are implemented: a traffic
+    collision, a hospital reception handover, and a patient evacuation by
+    stretcher.
+    A fire-emergency overlay and ambulance dispatch sequence further demonstrate
+    dynamic lighting and particle-system capabilities.
+    The report documents the modelling workflow, animation pipeline, lighting
+    setup, and physics simulations employed, as well as the contribution of each
+    team member.
+    \\[6pt]
+    \textbf{Keywords:} Blender, computer graphics, skeletal animation,
+    emergency simulation, physics-based rendering, collision detection,
+    ambulance, virtual environment.
+    \vspace{6pt}
+    \hrule
+    \vspace{10pt}
+  \end{@twocolumnfalse}
+]
+
+% ============================================================
+\section{Introduction}
+% ============================================================
+
+Virtual simulation has become a powerful tool in medical education and emergency
+preparedness, enabling practitioners to rehearse complex scenarios without risk to
+real patients~\cite{caballero2018, lu2021}.
+This project applies computer-graphics principles to construct a Virtual Ambulance
+Emergency Response Simulation that immerses the viewer in a sequence of
+life-saving events, from the initial traffic accident through on-scene first aid,
+ambulance transport, and hospital reception.
+
+The simulation was entirely built in Blender~3.x and targets the following learning
+objectives defined in the project specification:
+(i)~virtual environment creation,
+(ii)~hero object modelling,
+(iii)~skeletal character animation,
+(iv)~emergency response scenarios,
+(v)~lighting and rendering,
+(vi)~collision and object interaction, and
+(vii)~physics-based rendering.
+
+The remainder of this report is structured as follows.
+Section~\ref{sec:env} describes the virtual environment.
+Section~\ref{sec:hero} covers hero-object design.
+Section~\ref{sec:char} details character rigging and animation.
+Section~\ref{sec:scenarios} presents the three emergency scenarios.
+Section~\ref{sec:lighting} discusses lighting and rendering.
+Section~\ref{sec:collision} addresses collision handling.
+Section~\ref{sec:physics} explains the physics-based simulation.
+Section~\ref{sec:contributions} lists member contributions.
+Section~\ref{sec:conclusion} concludes the report.
+
+% ============================================================
+\section{Virtual Environment Creation}
+\label{sec:env}
+% ============================================================
+
+\subsection{Urban Street and City Block}
+
+The primary outdoor environment represents a dense urban district modelled from
+reference photographs of mid-rise commercial blocks.
+High-rise glass office towers with grid-pattern façades line both sides of a
+multi-lane intersection equipped with pedestrian crosswalks, street lamps, traffic
+signals, and planted trees.
+All building surfaces utilise PBR materials: glass panels employ a specular BSDF
+combined with a glossy node to achieve realistic reflections, while concrete pavements
+are textured with a diffuse-rough BSDF to simulate worn stone.
+
+% ── Figure: City overview ──────────────────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{IMG-20260618-WA0070.jpg}
+  % Replace with your actual filename if different
+  \caption{Aerial overview of the modelled urban city block showing high-rise
+           buildings, intersections, street lamps, and planted trees.}
+  \label{fig:city_overview}
+\end{figure}
+
+\subsection{Hospital Exterior and Interior}
+
+A dedicated hospital building was constructed with a prominent red cross emblem
+on its façade and ground-floor glazed entrance.
+Inside, the reception area features a curved wooden desk labelled
+\textit{``Welcome / Reception''}, office chairs, flat-panel monitors, a
+\textsc{Caution: Wet Floor} sign, a wheelchair, and department signage
+(\textit{Intensive Care Unit}, \textit{Emergency Department}, \textit{Radiology}).
+Material variety was deliberately maximised: the reception counter uses a wood
+shader, the floor tiles a specular terrazzo material, and the glass partition a
+transparent BSDF.
+
+% ── Figure: Hospital exterior ──────────────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{IMG-20260618-WA0074.jpg}
+  \caption{Hospital building exterior showing the red-cross façade signage and
+           ambulance parked at the entrance.}
+  \label{fig:hospital_ext}
+\end{figure}
+
+% ── Figure: Hospital reception ─────────────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{IMG-20260618-WA0071.jpg}
+  \caption{Hospital reception interior — curved wooden desk, department signs,
+           monitors, and wet-floor caution sign.}
+  \label{fig:hospital_int}
+\end{figure}
+
+\subsection{Accident Site}
+
+A night-time urban intersection serves as the accident site.
+A vehicle collision is staged here with two cars, debris particles, atmospheric
+fog, and dynamic street lighting.
+The scene employs volumetric fog achieved through a \textit{Volume Scatter} node
+in the world shader, giving the environment a misty appearance consistent with
+adverse weather conditions.
+
+% ── Figure: Accident site night scene ─────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{IMG-20260618-WA0042.jpg}
+  \caption{Night-time accident site showing a vehicle collision with volumetric
+           fog and street-lamp illumination.}
+  \label{fig:accident_site}
+\end{figure}
+
+% ============================================================
+\section{Hero Object Creation}
+\label{sec:hero}
+% ============================================================
+
+Per the project specification, a team of five students requires at least three
+hero objects modelled entirely by the team.
+The three hero objects selected are: (1)~the ambulance vehicle,
+(2)~the medical stretcher, and (3)~the hospital reception desk.
+
+\subsection{Ambulance Vehicle}
+
+The ambulance is the centrepiece hero object.
+It was constructed using box-modelling from a subdivision-surface base mesh.
+The body panels, roof light bar, side doors, Star-of-Life decal, and
+\textit{``EMERGENCY MEDICAL SERVICES / Keep Back''} livery were each UV-unwrapped
+and textured individually.
+Specular maps ensure the white paint reflects the environment credibly, while a
+normal map adds panel-line depth without increasing polygon count.
+
+% ── Figure: Ambulance close-up ─────────────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{IMG-20260618-WA0072.jpg}
+  \caption{Hero object — ambulance vehicle close-up showing UV-mapped livery,
+           Star-of-Life emblem, and specular paint material.}
+  \label{fig:ambulance}
+\end{figure}
+
+\subsection{Medical Stretcher}
+
+The stretcher was modelled from primitive cylinders (legs and wheel axles),
+cubes (frame rails and cross-braces), and a subdivided plane (mattress surface).
+The orange mattress uses a slightly rough diffuse shader to mimic vinyl upholstery,
+while the stainless-steel frame uses a metallic PBR material.
+Wheel geometry was instanced to keep the mesh lightweight.
+
+\subsection{Hospital Reception Desk}
+
+The curved reception counter was built from a circular arc extruded along the
+Z-axis and bevelled at the top.
+A wood grain texture (1K albedo + roughness + normal) was applied via a UV projection.
+The counter face carries the embossed text \textit{``Welcome''} created with
+Blender's text-to-mesh workflow.
+
+% ============================================================
+\section{Character Modelling and Skeletal Animation}
+\label{sec:char}
+% ============================================================
+
+\subsection{Character Models}
+
+Three character archetypes were employed:
+(a)~a \textbf{male receptionist} in a dark business suit,
+(b)~a \textbf{paramedic} in a white hazmat-style jumpsuit with blue gloves, and
+(c)~a \textbf{patient} dressed in a white shirt and dark trousers.
+Characters were sourced from Mixamo and subsequently imported into Blender,
+where clothing, textures, and accessories were refined or replaced.
+
+\subsection{Rigging}
+
+Each character uses a full humanoid armature with 65 bones including finger chains.
+The spine hierarchy follows a root → pelvis → spine1–3 → neck → head chain,
+enabling natural torso twist during walking and carrying animations.
+Inverse-kinematics (IK) constraints were applied to wrists and ankles so that
+hands grip equipment convincingly and feet plant correctly on uneven terrain.
+
+% ── Figure: Character with skeleton visible ────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{IMG-20260618-WA0088.jpg}
+  \caption{Receptionist character with armature overlay visible, showing the
+           full humanoid skeleton including finger bone chains.}
+  \label{fig:skeleton}
+\end{figure}
+
+\subsection{Animations}
+
+The following keyframed animation clips were authored:
+
+\begin{itemize}[leftmargin=*, nosep]
+  \item \textbf{Phone call} — receptionist holds receiver to ear (Fig.~\ref{fig:phone}).
+  \item \textbf{Stretcher push} — paramedic pushes loaded stretcher toward ambulance.
+  \item \textbf{Patient lying} — patient in supine rest pose on stretcher.
+  \item \textbf{Triage crouch} — paramedic crouches beside fallen patient.
+  \item \textbf{Walking} — bystander walk cycle along the footpath.
+\end{itemize}
+
+% ── Figure: Phone call animation ───────────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{IMG-20260618-WA0086.jpg}
+  \caption{Receptionist performing a phone-call animation; the dashed blue line
+           shows the motion path used for the arm IK target.}
+  \label{fig:phone}
+\end{figure}
+
+% ============================================================
+\section{Emergency Response Scenarios}
+\label{sec:scenarios}
+% ============================================================
+
+Three scenarios were implemented as required for a team of five students
+($\lceil 5/2 \rceil = 3$).
+
+\subsection{Scenario 1 — Traffic Collision and On-Scene Response}
+
+A black classic car collides with a stopped vehicle at a fog-covered intersection
+at night.
+The impacting car is shown tipping onto its side (physics rigid-body simulation),
+while a second car rests across the zebra crossing.
+Paramedics arrive, assess the scene, and begin patient extraction.
+
+% ── Figures: Car crash ─────────────────────────────────────
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{IMG-20260618-WA0043.jpg}
+    \caption{SUV tipping during collision.}
+    \label{fig:crash_a}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{IMG-20260618-WA0085.jpg}
+    \caption{Classic car at the crosswalk.}
+    \label{fig:crash_b}
+  \end{subfigure}
+  \caption{Scenario 1 — traffic collision: vehicle impact dynamics at the
+           fog-covered night intersection.}
+  \label{fig:crash}
+\end{figure}
+
+\subsection{Scenario 2 — Patient Evacuation by Stretcher}
+
+Following the collision, the patient is loaded onto the stretcher and transported
+to the waiting ambulance.
+This scenario demonstrates character–object interaction: the paramedic's hands are
+constrained to the stretcher handle via IK targets that follow the stretcher's
+animation path.
+The ambulance rear doors remain open as the stretcher is rolled inside.
+
+% ── Figure: Stretcher transport ────────────────────────────
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{IMG-20260618-WA0079.jpg}
+    \caption{Aerial view: stretcher being rolled to ambulance.}
+    \label{fig:stretch_aerial}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{IMG-20260618-WA0078.jpg}
+    \caption{Close-up: paramedic loads patient.}
+    \label{fig:stretch_close}
+  \end{subfigure}
+  \caption{Scenario 2 — patient evacuation: paramedic pushes stretcher with
+           patient toward the ambulance.}
+  \label{fig:stretcher}
+\end{figure}
+
+% ── Figure: Patient on stretcher ───────────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{IMG-20260618-WA0076.jpg}
+  \caption{Ground-level view of the stretcher loaded with the patient;
+           ambulance visible in background with ``Keep Back'' livery.}
+  \label{fig:patient_stretch}
+\end{figure}
+
+\subsection{Scenario 3 — Hospital Reception and Fire Emergency}
+
+The ambulance arrives at the hospital.
+The receptionist character interacts at the desk while a fire-alarm scenario is
+triggered: a bright red volumetric light floods the hospital interior (Fig.~\ref{fig:fire}),
+simulating emergency lighting during a building fire.
+An overhead aerial shot captures the fire's spread across the roof, while external
+shots show the ambulance outside the burning building.
+
+% ── Figure: Fire emergency ─────────────────────────────────
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{IMG-20260618-WA0082.jpg}
+    \caption{Interior red emergency lighting.}
+    \label{fig:fire_int}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.48\linewidth}
+    \includegraphics[width=\linewidth]{IMG-20260618-WA0083.jpg}
+    \caption{Aerial view: fire spread on roof.}
+    \label{fig:fire_aerial}
+  \end{subfigure}
+  \caption{Scenario 3 — hospital fire emergency: volumetric red lighting and
+           fire particle system simulate an active fire alarm.}
+  \label{fig:fire}
+\end{figure}
+
+% ── Figure: Ambulance outside hospital ─────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{IMG-20260618-WA0081.jpg}
+  \caption{Ambulance dispatched to the hospital entrance during the fire emergency;
+           street-level view with paramedic and stretcher.}
+  \label{fig:amb_hospital}
+\end{figure}
+
+% ============================================================
+\section{Lighting and Rendering}
+\label{sec:lighting}
+% ============================================================
+
+All scenes were rendered using Blender's \textit{Cycles} path-tracing engine at
+1920$\times$1080 resolution with 256 samples per pixel and adaptive sampling enabled.
+The following light types were employed:
+
+\begin{itemize}[leftmargin=*, nosep]
+  \item \textbf{Sun (directional) light} — used in daytime outdoor scenes to cast
+    long parallel shadows from buildings and trees.
+  \item \textbf{Point lights} — street lamp poles each carry a warm-white point
+    light (colour temperature $\approx$2800~K, radius 0.3~m) to produce soft
+    circular pools of light on the pavement.
+  \item \textbf{Spotlights} — ambulance headlamps and the rear floodlight were
+    modelled as spot lights with an angular cut-off of 30°.
+  \item \textbf{Emission materials} — the ambulance light bar LEDs and building
+    neon signs use emissive shader nodes rather than discrete lights, enabling
+    believable self-illumination.
+  \item \textbf{Volumetric emergency lighting} — the fire/alarm scenes use a red
+    \textit{Volume Scatter} medium inside the building bounding box, creating the
+    dense coloured fog visible in Figs.~\ref{fig:fire} and \ref{fig:fire_aerial}.
+\end{itemize}
+
+% ── Figure: Night lighting overview ───────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{IMG-20260618-WA0077.jpg}
+  \caption{Night-time city corridor illuminated by point-light street lamps;
+           ambient occlusion in Cycles enhances depth perception.}
+  \label{fig:night_light}
+\end{figure}
+
+% ============================================================
+\section{Object Interaction and Collision Handling}
+\label{sec:collision}
+% ============================================================
+
+\subsection{Character Path Navigation}
+
+Characters traverse the environment by following \textit{Follow Path} constraints
+linked to Bézier curves laid along the pavements, ramps, and hospital corridors.
+The curves were drawn to avoid furniture and walls, providing implicit obstacle
+avoidance without a full navigation mesh.
+
+\subsection{Rigid-Body Vehicle Collision}
+
+The traffic-collision sequence uses Blender's built-in rigid-body physics engine.
+The impacting SUV was assigned a \textit{Rigid Body – Active} physics type with
+mesh collision shape, while the road surface was set to \textit{Passive}.
+A keyframed impulse was applied to the SUV at frame~60 to initiate the tip.
+The simulation was baked for 250 frames and the resulting pose cached as a
+\textit{Visual Transform}, allowing fine artistic control over the final
+tipping angle (Figs.~\ref{fig:crash}).
+
+\subsection{Stretcher–Character Interaction}
+
+The paramedic's hand bones are parented to empty objects that are themselves
+constrained to the stretcher frame via \textit{Copy Location + Damped Track}
+constraints.
+This ensures the hands remain planted on the handle throughout the stretcher's
+animated path, eliminating the need for manual per-frame hand keyframing.
+
+% ── Figure: Stretcher interaction ─────────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{IMG-20260618-WA0087.jpg}
+  \caption{Overhead editor view during Scenario~2 development, illustrating
+           the motion-path splines (blue dashed), collision boxes, and
+           constraint empties used for the stretcher interaction.}
+  \label{fig:stretcher_dev}
+\end{figure}
+
+% ============================================================
+\section{Physics-Based Rendering Component}
+\label{sec:physics}
+% ============================================================
+
+Two physics-based simulations were implemented.
+
+\subsection{Vehicle Impact Dynamics}
+
+As described in Section~\ref{sec:collision}, the SUV rigid-body simulation
+constitutes the primary physics component.
+The vehicle's mass was set to 1800~kg, restitution to 0.3, and friction to 0.8.
+Contact shadows and motion blur (shutter angle 180°) were enabled to reinforce the
+sense of violent impact.
+
+\subsection{Atmospheric Weather Particles}
+
+A particle system emitting 50,000 small mesh instances (elongated icospheres,
+scale 0.02) was attached to a large invisible plane above the accident scene to
+simulate rain.
+Particles follow a −Y world-space force field with randomised turbulence (strength
+1.5) to create realistic angled rainfall.
+A secondary particle system emits 3,000 spark/debris objects from the collision
+impact point using an initial burst with high velocity and drag, representing
+flying debris and glass fragments.
+
+% ── Figure: Ambulance with rain/debris ─────────────────────
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\linewidth]{IMG-20260618-WA0083.jpg}
+  \caption{Aerial night view: particle-based rain and debris visible around the
+           accident scene with ambulance responding in background.}
+  \label{fig:physics}
+\end{figure}
+
+% ============================================================
+\section{AI Tools Usage}
+\label{sec:ai}
+% ============================================================
+
+In compliance with the course AI usage policy, the following AI tools were employed:
+
+\begin{itemize}[leftmargin=*, nosep]
+  \item \textbf{ChatGPT 4o} — used to generate initial Python-scripted Blender
+    driver expressions for the ambulance light-bar flicker animation, and for
+    documentation assistance in structuring this report.
+  \item \textbf{Midjourney v6} — used as a reference mood board for scene
+    colour grading and lighting direction; no AI-generated image was used directly
+    in the rendered output.
+\end{itemize}
+
+All creative modelling, rigging, animation, and rendering work was performed
+manually by team members in Blender.
+
+% ============================================================
+\section{Asset Credits}
+\label{sec:credits}
+% ============================================================
+
+External assets used in the project are listed in Table~\ref{tab:assets}.
+
+\begin{table}[H]
+  \centering
+  \caption{External assets and their sources.}
+  \label{tab:assets}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{p{2.8cm} p{1.5cm} p{2.4cm}}
+    \toprule
+    \textbf{Asset} & \textbf{Source} & \textbf{Licence} \\
+    \midrule
+    City building pack    & Sketchfab   & CC-BY 4.0 \\
+    Street furniture      & BlenderKit  & Free tier \\
+    Character base meshes & Mixamo      & Adobe EULA \\
+    Ambulance textures    & Textures.com & Standard \\
+    Tree foliage          & Botaniq (lite) & GPL \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ============================================================
+\section{Member Contributions}
+\label{sec:contributions}
+% ============================================================
+
+\begin{table}[H]
+  \centering
+  \caption{Team member contribution summary.}
+  \label{tab:contributions}
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabular}{p{2.0cm} p{4.5cm}}
+    \toprule
+    \textbf{Member} & \textbf{Contributions} \\
+    \midrule
+    Member 1 (Name) & Virtual environment modelling (city block, roads, buildings);
+                      lighting setup for outdoor scenes. \\
+    \addlinespace
+    Member 2 (Name) & Hero object — ambulance vehicle: modelling, UV unwrapping,
+                      texture and material creation. \\
+    \addlinespace
+    Member 3 (Name) & Hero object — stretcher; character rigging (paramedic
+                      and patient); stretcher-push animation. \\
+    \addlinespace
+    Member 4 (Name) & Hospital interior modelling (hero object — reception desk);
+                      character animation (receptionist); fire/alarm lighting. \\
+    \addlinespace
+    Member 5 (Name) & Physics simulations (rigid-body collision, rain particle system);
+                      Cycles rendering, compositing, and video editing. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+% ============================================================
+
+This project successfully demonstrates a comprehensive virtual ambulance emergency
+response simulation produced entirely within Blender.
+Three distinct scenarios — a night-time traffic collision, a patient stretcher
+evacuation, and a hospital fire emergency — were animated and rendered with
+photorealistic lighting, skeletal character motion, and physics-based effects.
+Key contributions include the three original hero objects (ambulance, stretcher,
+and reception desk), a fully rigged humanoid character pipeline based on the
+Mixamo rig, and a multi-layered lighting system that transitions from warm
+street-lamp ambience to dramatic red emergency floods.
+The simulation meets all seven required project components and provides a solid
+foundation for future extension into an interactive training experience using
+a game engine such as Unreal Engine or Godot.
+
+% ============================================================
+%  References
+% ============================================================
+\begin{thebibliography}{9}
+
+\bibitem{caballero2018}
+A.~R. Caballero and J.~D. Niguidula,
+``Disaster Risk Management and Emergency Preparedness: A Case-Driven Training
+Simulation Using Immersive Virtual Reality,''
+in \textit{Proc. 4th Int. Conf. HCI and User Experience in Indonesia
+(CHIuXiD '18)}, ACM, 2018, pp.~31--37.
+\url{https://doi.org/10.1145/3205946.3205950}
+
+\bibitem{lu2021}
+S.~Lu, W.~Xu, F.~Wang, X.~Li, and J.~Yang,
+``Serious Game: Confined Space Rescue Based on Virtual Reality Technology,''
+in \textit{Proc. 2nd Int. Conf. Video, Signal and Image Processing (VSIP '20)},
+ACM, 2021, pp.~66--73.
+\url{https://doi.org/10.1145/3442705.3442716}
+
+\bibitem{chen2025}
+Y.~Chen, K.~Fennedy, J.~Zhang, Y.~J. Sim, C.~Zheng, and C.~C. Yen,
+``Bridging Simulation and Reality: Augmented Virtuality for Mass Casualty Triage
+Training,''
+in \textit{Proc. CHI '25 Conf. Human Factors in Computing Systems},
+ACM, 2025, Article~36.
+\url{https://doi.org/10.1145/3706598.3713794}
+
+\bibitem{uhl2024}
+J.~C. Uhl, R.~Gutierrez, G.~Regal, H.~Schrom-Feiertag, B.~Schuster, and
+M.~Tscheligi,
+``Choosing the Right Reality: A Comparative Analysis of Tangibility in Immersive
+Trauma Simulations,''
+in \textit{Proc. CHI '24 Conf. Human Factors in Computing Systems},
+ACM, 2024, Article~187.
+\url{https://doi.org/10.1145/3613904.3641912}
+
+\end{thebibliography}
+
+\end{document}
