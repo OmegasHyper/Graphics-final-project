@@ -45,6 +45,18 @@ The project demonstrates practical application of core computer graphics concept
 
 ---
 
+## Project Resources
+
+<a href="https://drive.google.com/drive/u/2/folders/1B-ugdRD1HMusHSiMQmOXK2HNwXu8TAU5"> Google Drive Link </a>
+
+**This link contains:**
+
+- Full animation video
+- Blender files
+- Assets
+- report
+---
+
 ##  Technical Specifications
 
 | Category | Specification |
