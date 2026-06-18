@@ -15,9 +15,7 @@
 7. [Emergency Scenarios](#emergency-scenarios)
 8. [Lighting & Rendering](#lighting--rendering)
 9. [Physics & Simulations](#physics--simulations)
-10. [Project Structure](#project-structure)
 11. [Installation & Setup](#installation--setup)
-12. [Video Showcase](#video-showcase)
 13. [Asset Credits](#asset-credits)
 14. [AI Tools Usage](#ai-tools-usage)
 15. [Future Enhancements](#future-enhancements)
@@ -174,11 +172,6 @@ Following the collision, the patient is loaded onto the stretcher and transporte
 - **Animation Sync:** Stretcher movement timed to match paramedic's walking pace
 - **Detail:** Ambulance rear doors remain open, showcasing interior modeling
 
-<div align="center">
-  <img src="./assets/screenshots/scenario-2-preview.png" alt="Scenario 2 Preview" width="800"/>
-  <br>
-  <sub><i>Patient Evacuation by Stretcher</i></sub>
-</div>
 
 ### Scenario 3: Hospital Arrival and Fire Emergency 🏨🔥
 
@@ -197,12 +190,6 @@ The ambulance arrives at the hospital, completing the emergency response chain. 
 - **Fire Simulation:** Particle system for fire spread across the roof
 - **Ambulance Response:** The ambulance is dispatched to a new emergency outside the burning building
 - **Integrated Effects:** Volumetric lighting, particle systems, and dynamic camera perspectives
-
-<div align="center">
-  <img src="./assets/screenshots/scenario-3-preview.png" alt="Scenario 3 Preview" width="800"/>
-  <br>
-  <sub><i>Hospital Arrival and Fire Emergency</i></sub>
-</div>
 
 **This scenario effectively demonstrates:**
 - Complete patient transport workflow (accident → ambulance → hospital)
@@ -227,14 +214,7 @@ All scenes were rendered using **Blender's Cycles path-tracing engine** with hig
 | **Spotlights** | Ambulance headlamps, rear floodlight | Cut-off: 30°, Penumbra: 5° |
 | **Emission Materials** | Light bar LEDs, neon signs | Self-illumination with controlled intensity |
 | **Volumetric Lighting** | Fire/alarm scenes | Red Volume Scatter medium inside building |
-
-### Rendering Settings
-- **Engine:** Cycles Path Tracing
-- **Resolution:** 1920 × 1080
-- **Samples:** 256 per pixel (adaptive sampling)
-- **Denoising:** OptiX AI Denoiser
-- **Motion Blur:** Shutter angle 180°, Strength 0.5
-
+]
 ---
 
 ## 🔬 Physics & Simulations
@@ -254,63 +234,17 @@ All scenes were rendered using **Blender's Cycles path-tracing engine** with hig
 - **Debris System:** 3,000 spark/debris objects from collision impact
 - **Initial Burst:** High velocity with drag
 
-### Fire Particle System (Scenario 3)
+### Fire Particle Syste (Scenario 3)
 - **Emitter:** Hospital roof surface
 - **Particle Count:** 5,000+ particles
 - **Motion:** Upward convection with turbulence
 - **Visual:** Orange-red emissive materials with glow
 - **Integration:** Synchronized with volumetric red lighting
 
----
-
-## 📁 Project Structure
-
-```
-virtual-ambulance-simulation/
-├── README.md
-├── Report.pdf
-├── assets/
-│   ├── textures/
-│   │   ├── ambulance/
-│   │   ├── buildings/
-│   │   ├── hospital/
-│   │   └── environment/
-│   ├── models/
-│   │   ├── ambulance.blend
-│   │   ├── stretcher.blend
-│   │   ├── reception_desk.blend
-│   │   ├── city_block.blend
-│   │   └── hospital.blend
-│   ├── characters/
-│   │   ├── paramedic.blend
-│   │   ├── receptionist.blend
-│   │   └── patient.blend
-│   ├── animations/
-│   │   ├── scenario_1.blend
-│   │   ├── scenario_2.blend
-│   │   └── scenario_3.blend
-│   ├── screenshots/
-│   │   ├── scenario-1-preview.png
-│   │   ├── scenario-2-preview.png
-│   │   ├── scenario-3-preview.png
-│   │   └── behind-the-scenes.png
-│   └── videos/
-│       ├── final_video.mp4
-│       ├── scenario_1.mp4
-│       ├── scenario_2.mp4
-│       └── scenario_3.mp4
-├── renders/
-│   └── final_output/
-├── docs/
-│   ├── IEEE_Conference_Paper.pdf
-│   └── project_presentation.pptx
-└── scripts/
-    └── ambulance_light_flicker.py
-```
 
 ---
 
-## 🚀 Installation & Setup
+##  Installation & Setup
 
 ### Prerequisites
 - **Blender 3.x** or higher ([Download](https://www.blender.org/download/))
@@ -350,59 +284,7 @@ virtual-ambulance-simulation/
 
 ---
 
-## 🎥 Video Showcase
-
-### Complete Simulation Video
-<div align="center">
-  <a href="./assets/videos/final_video.mp4">
-    <img src="./assets/screenshots/behind-the-scenes.png" alt="Full Simulation Video" width="100%"/>
-  </a>
-  <br>
-  <sub><i>Click to watch the complete emergency response simulation</i></sub>
-</div>
-
-### Scenario Breakdown Videos
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center">
-        <a href="./assets/videos/scenario_1.mp4">
-          <img src="./assets/screenshots/scenario-1-preview.png" width="400"/>
-          <br>
-          <b>Traffic Collision</b>
-        </a>
-      </td>
-      <td align="center">
-        <a href="./assets/videos/scenario_2.mp4">
-          <img src="./assets/screenshots/scenario-2-preview.png" width="400"/>
-          <br>
-          <b>Patient Evacuation</b>
-        </a>
-      </td>
-    </tr>
-    <tr>
-      <td align="center">
-        <a href="./assets/videos/scenario_3.mp4">
-          <img src="./assets/screenshots/scenario-3-preview.png" width="400"/>
-          <br>
-          <b>Hospital Arrival & Fire</b>
-        </a>
-      </td>
-      <td align="center">
-        <a href="./assets/videos/final_video.mp4">
-          <img src="./assets/screenshots/behind-the-scenes.png" width="400"/>
-          <br>
-          <b>Behind the Scenes</b>
-        </a>
-      </td>
-    </tr>
-  </table>
-</div>
-
----
-
-## 📦 Asset Credits
+##  Asset Credits
 
 ### External Assets Used
 
@@ -418,7 +300,7 @@ All hero objects (ambulance, stretcher, reception desk) were modeled entirely by
 
 ---
 
-## 🤖 AI Tools Usage
+## AI Tools Usage
 
 In compliance with the course AI usage policy:
 
@@ -447,13 +329,13 @@ The simulation provides a solid foundation for future extension into interactive
 
 ---
 
-## 📄 License
+##  License
 
 This project is developed for educational purposes as part of the Computer Graphics and Visualization course (SBEG353/SBES140).
 
 ---
 
-## 📚 References
+## References
 
 1. Caballero, A. R., & Niguidula, J. D. (2018). "Disaster Risk Management and Emergency Preparedness: A Case-Driven Training Simulation Using Immersive Virtual Reality." *Proc. 4th Int. Conf. HCI and User Experience in Indonesia*, ACM, pp. 31-37.
 
@@ -465,16 +347,5 @@ This project is developed for educational purposes as part of the Computer Graph
 
 ---
 
-## 📞 Contact
-
-For questions or collaboration inquiries, please contact the team:
-
-- **Project Supervisor:** Course Instructor, SBEG353/SBES140
-- **Team Lead:** Jana Gamal Abdelzaher (91240240)
-- **Repository:** [GitHub Link]
-
+- **Project Supervisor:** Dr. Mohammed Rushdi, SBEG353/
 ---
-
-<div align="center">
-  <sub>Built with ❤️ using Blender 3.x | Spring 2025/2026</sub>
-</div>
