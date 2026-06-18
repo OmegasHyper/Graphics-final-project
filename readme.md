@@ -51,10 +51,10 @@ The project demonstrates practical application of core computer graphics concept
 |----------|----------------|
 | **Software** | Blender 3.x |
 | **Render Engine** | Cycles (Path Tracing) |
-| **Resolution** | 1920 × 1080 pixels |
-| **Samples** | 256 samples per pixel (adaptive sampling enabled) |
+| **Resolution** | 1440px × 810px |
+| **Samples** | 256 - 500 samples per pixel (adaptive sampling enabled) (depending on hardware) |
 | **Denoising** | OptiX AI Denoiser |
-| **Simulation Rate** | 60 frames per second (physics) |
+| **Simulation Rate** | 24 frames per second (physics) |
 | **Polygon Count** | ~15,000 triangles (ambulance) |
 | **Character Rig** | 65 bones per character (including finger chains) |
 | **Spine Hierarchy** | root → pelvis → spine1–3 → neck → head chain |
@@ -124,26 +124,25 @@ A night-time urban intersection serves as the accident site, chosen for dramatic
 
 Per the project specification, a team of six requires **three hero objects** (⌈6/2⌉ = 3), modeled entirely from scratch by the team.
 
-### 1. Ambulance Vehicle (Centerpiece)
+### 1. Male Character (Reciptionist)
 
 **Modeling Process:**
-- Box-modeling from a subdivision-surface base mesh
-- Progressive refinement from base mesh
-- **Polygon Count:** ~15,000 triangles
-- **Details:** Side mirrors, windshield wipers, door handles, roof-mounted emergency lighting array
+- Sculpted base mesh with topology optimized for animation and rigging
+- Progressive refinement of facial features, hair geometry, and clothing layers
+- **Polygon Count:** ~25,000–30,000 triangles (including hair cards and clothing)
+- **Details:** Separately modeled hair volume, shirt collar, detailed hands, and a low-poly vintage cordless phone prop
 
 **Texturing:**
-- Individually UV-unwrapped body panels
-- UV-unwrapped roof light bar
-- UV-unwrapped side doors
-- Star-of-Life decal UV mapping
-- "EMERGENCY MEDICAL SERVICES / Keep Back" livery UV mapping
+- UV-unwrapped head and skin coordinates for seamless face textures
+- UV-unwrapped clothing meshes (sweater and pants)
+- Dedicated UV mapping for the hand-held phone accessory
+- Clean procedural mapping for fabric folds and wrinkles
 
 **Materials:**
-- White paint: Specular maps for environmental reflection
-- Panel lines: Normal maps for panel-line depth
-- Windows: Glass BSDF with refraction
-- Tires: Diffuse-rough with high roughness
+- Sweater: Dark satin/synthetic fabric shader with a smooth specular gloss map for surface highlights
+- Pants: Dark, high-gloss leather or vinyl material with sharp specular reflections
+- Skin: Subsurface scattering (SSS) shader with low roughness for a realistic skin sheen
+- Hair: Dark diffuse material with subtle anisotropic reflections
 
 ### 2. Medical Stretcher
 
