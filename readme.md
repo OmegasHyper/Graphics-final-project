@@ -1,40 +1,56 @@
 # Virtual Ambulance Emergency Response Simulation
 
-### A Blender-Based 3D Medical Emergency Training Visualization
-
 **Final Course Project — Computer Graphics and Visualization (SBEG353/SBES140)**
 **Spring 2025/2026 — Cairo University**
 
 ---
 
-## 🏥 Project Overview
+## 📋 Table of Contents
 
-**Virtual Ambulance Emergency Response Simulation** is a comprehensive 3D visualization project that models a complete urban emergency medical response workflow. The simulation walks through a multi-scene virtual environment encompassing:
-
-- City streets with traffic infrastructure
-- A night-time accident site with vehicle collision and on-scene response
-- Patient evacuation and ambulance transport
-- Hospital interiors with reception and patient handover
-- A hospital fire-emergency overlay with secondary ambulance dispatch
-
-The project demonstrates the practical application of core computer graphics concepts, including environment modeling, UV mapping and texturing, skeletal character animation with inverse kinematics, physics-based rigid-body and particle simulation, multi-source lighting design, and object/character collision handling.
+- [Project Overview](#-project-overview)
+- [Team Members](#-team-members)
+- [Technical Specifications](#-technical-specifications)
+- [Virtual Environment](#-virtual-environment)
+- [Hero Objects](#-hero-objects)
+- [Character System](#-character-system)
+- [Emergency Response Sequence](#-emergency-response-sequence)
+- [Lighting & Rendering](#-lighting--rendering)
+- [Physics & Simulations](#-physics--simulations)
+- [Object Interaction & Collision](#-object-interaction--collision)
+- [Audio & Narration](#-audio--narration)
+- [AI Tools Usage](#-ai-tools-usage)
+- [Asset Credits](#-asset-credits)
+- [Installation & Setup](#-installation--setup)
+- [Future Enhancements](#-future-enhancements)
+- [References](#-references)
 
 ---
 
-## 👥 Team Members & Contributions
+## 📋 Project Overview
 
-The team consists of **six members**. In line with the course's requirement that workload scale with team size, responsibilities were divided so that each member owns one comparable, end-to-end area of the project — spanning environment modeling, a hero object, character/animation work, lighting, physics, or post-production.
+**Virtual Ambulance Emergency Response Simulation** is a comprehensive 3D visualization project that models a complete urban emergency medical response workflow. The simulation follows a chronological emergency response sequence:
 
-| # | Member | Student ID | Contribution Area | Details |
-|---|--------|------------|--------------------|---------|
-| 1 | **Jana Gamal Abdelzaher** | 91240240 | Urban Environment & Outdoor Lighting | City block, road network, and building modeling; street-lamp and directional lighting setup for all outdoor scenes |
-| 2 | **Maryam Hosney** | student_id2 | Hero Object — Ambulance Vehicle | Full modeling, UV unwrapping, texture creation, and PBR material setup for the ambulance (livery, light bar, decals) |
-| 3 | **Mohaned Hassan** | 9231261 | Hero Object — Stretcher & Character Rigging | Stretcher modeling; humanoid rigging for paramedic and patient characters; stretcher-push animation with IK constraints |
-| 4 | **Hamdy** | student_id4 | Hospital Interior, Receptionist Animation & Voice-Over | Hero object — reception desk; hospital interior modeling; receptionist character animation; fire/alarm emergency lighting; **voice-over narration for the final demonstration video** |
-| 5 | **Kareem Fareed** | 91240575 | Physics Simulation | Rigid-body vehicle collision dynamics for the traffic accident; rain particle system for atmospheric weather effects |
-| 6 | **Mohammed Abdelrazek** | student_id6 | Rendering & Post-Production | Cycles render configuration and optimization; fire particle system for the hospital roof; compositing and final video editing |
+- **Car crash** at a night-time urban intersection with vehicle collision physics
+- **Emergency call** received at the hospital reception desk
+- **CPR** administered by a paramedic at the accident scene
+- **Ambulance arrives** at the hospital with dynamic reflective emergency lighting
 
-> **Note:** Please replace the placeholder student IDs (`student_id2`, `student_id4`, `student_id5`, `student_id6`) with the correct values before final submission.
+The project demonstrates practical application of core computer graphics concepts, including environment modeling, UV mapping and texturing, skeletal character animation with inverse kinematics, physics-based rigid-body and particle simulation, multi-source lighting design, and object/character collision handling.
+
+---
+
+## 👥 Team Members
+
+The team consists of **six members**. In line with the course's requirement that workload scale with team size, responsibilities were divided so that each member owns one end-to-end area of the project.
+
+| # | Member | Contribution Area | Details |
+|---|--------|--------------------|---------|
+| 1 | **Jana Gamal Abdelzaher** | Urban Environment & Outdoor Lighting | City block, road network, and building modeling; street-lamp and directional lighting setup for all outdoor scenes; volumetric fog implementation |
+| 2 | **Maryam Hosney** | Hero Object — Ambulance Vehicle | Full modeling (box-modeling from subdivision surface), UV unwrapping, texture creation, and PBR material setup for the ambulance including livery, light bar, Star-of-Life decals, and "EMERGENCY MEDICAL SERVICES / Keep Back" text |
+| 3 | **Mohaned Hassan** | Hero Object — Stretcher & Character Rigging | Stretcher modeling from primitives (cylinders, cubes, subdivided planes); humanoid rigging for paramedic and patient characters (65 bones with IK constraints); stretcher-push animation |
+| 4 | **Hamdy** | Hospital Interior, Receptionist Animation & Voice-Over | Hero object — reception desk (curved wooden desk with embossed "Welcome" text); hospital interior modeling with signage, monitors, and props; receptionist phone-call animation; voice-over narration for the final demonstration video |
+| 5 | **Kareem Fareed** | Physics Simulation | Rigid-body vehicle collision dynamics for the traffic accident (1800kg mass, 0.3 restitution, 0.8 friction); rain particle system (50,000 particles) and debris system (3,000 particles) for atmospheric weather effects |
+| 6 | **Mohammed Abdelrazek** | Rendering & Post-Production | Cycles render configuration and optimization (256 samples, OptiX AI denoising, 1920×1080 resolution); compositing; final video editing and export |
 
 ---
 
@@ -50,51 +66,66 @@ The team consists of **six members**. In line with the course's requirement that
 | **Simulation Rate** | 60 frames per second (physics) |
 | **Polygon Count** | ~15,000 triangles (ambulance) |
 | **Character Rig** | 65 bones per character (including finger chains) |
-
----
-
-## 🎥 Final Video Showcase
-
-<div align="center">
-  <video width="800" controls>
-    <source src="./assets/videos/final_video.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <br>
-  <sub><i>Complete Emergency Response Simulation — narrated walkthrough of all three scenarios</i></sub>
-</div>
+| **Spine Hierarchy** | root → pelvis → spine1–3 → neck → head chain |
+| **Physics Engine** | Blender Rigid Body |
 
 ---
 
 ## 🌆 Virtual Environment
 
 ### Urban Street and City Block
+
 The primary outdoor environment represents a dense urban district modeled from reference photographs of mid-rise commercial blocks, with careful attention to scale and proportion between vehicles, pedestrians, and buildings.
 
 **Key features:**
 - High-rise glass office towers with grid-pattern façades
 - Multi-lane intersection with pedestrian crosswalks
-- Street lamps with warm point lighting, traffic signals, and planted trees
+- Street lamps with warm point lighting (2800K, 0.3m radius)
+- Traffic signals and planted trees
 - PBR materials: glass panels with specular BSDF, concrete with diffuse-rough BSDF
 - Asphalt road surfaces with tuned roughness values
 
+**Materials Implementation:**
+| Surface | Material Type | Shader Nodes |
+|---------|--------------|--------------|
+| Glass | Specular | Glass BSDF + Glossy |
+| Concrete | Diffuse | Diffuse BSDF + Roughness |
+| Asphalt | Rough | Principled BSDF (roughness 0.9) |
+
 ### Hospital Exterior and Interior
+
 A dedicated hospital building features a prominent red-cross emblem and a ground-floor glazed entrance, following contemporary hospital architecture with clean geometric lines.
 
-**Interior elements:**
+**Exterior Elements:**
+- Red-cross emblem on façade
+- Ground-floor glazed entrance
+- Clean geometric architecture
+- Hospital signage
+
+**Interior Elements:**
 - Curved wooden desk labeled "Welcome / Reception"
 - Office chairs and flat-panel monitors
-- CAUTION: WET FLOOR sign and wheelchair
+- CAUTION: WET FLOOR sign
+- Wheelchair
 - Department signage (Intensive Care Unit, Emergency Department, Radiology)
 - Material variety: wood shader with anisotropic reflections, specular terrazzo flooring, transparent BSDF glass partitions
 
+**Materials Implementation:**
+| Element | Material Type | Shader Nodes |
+|---------|--------------|--------------|
+| Reception Desk | Wood | Principled BSDF + Anisotropic |
+| Floor Tiles | Terrazzo | Principled BSDF + Specular |
+| Glass Partition | Transparent | Transparent BSDF + Refraction |
+
 ### Accident Site
+
 A night-time urban intersection serves as the accident site, chosen for dramatic lighting potential and contrast between emergency vehicles and the dark environment.
 
 **Features:**
 - Two-car collision with debris particles
 - Volumetric fog via a Volume Scatter node in the world shader
-- Dynamic street lighting and misty atmospheric conditions
+- Dynamic street lighting
+- Wet asphalt materials supporting reflective emergency-light rendering
 
 ---
 
@@ -103,97 +134,178 @@ A night-time urban intersection serves as the accident site, chosen for dramatic
 Per the project specification, a team of six requires **three hero objects** (⌈6/2⌉ = 3), modeled entirely from scratch by the team.
 
 ### 1. Ambulance Vehicle (Centerpiece)
-- **Modeling:** Box-modeling from a subdivision-surface base mesh
+
+**Modeling Process:**
+- Box-modeling from a subdivision-surface base mesh
+- Progressive refinement from base mesh
 - **Polygon Count:** ~15,000 triangles
 - **Details:** Side mirrors, windshield wipers, door handles, roof-mounted emergency lighting array
-- **Texturing:** Individually UV-unwrapped body panels, roof light bar, side doors, Star-of-Life decal, and "EMERGENCY MEDICAL SERVICES / Keep Back" livery
-- **Materials:** Specular maps for environmental reflection, normal maps for panel-line depth
+
+**Texturing:**
+- Individually UV-unwrapped body panels
+- UV-unwrapped roof light bar
+- UV-unwrapped side doors
+- Star-of-Life decal UV mapping
+- "EMERGENCY MEDICAL SERVICES / Keep Back" livery UV mapping
+
+**Materials:**
+- White paint: Specular maps for environmental reflection
+- Panel lines: Normal maps for panel-line depth
+- Windows: Glass BSDF with refraction
+- Tires: Diffuse-rough with high roughness
 
 ### 2. Medical Stretcher
-- **Modeling:** Primitive cylinders (legs, wheel axles), cubes (frame rails), subdivided plane (mattress)
-- **Design:** Standard hospital stretcher dimensions with adjustable backrest geometry
-- **Materials:** Orange vinyl upholstery (rough diffuse shader), stainless-steel frame (metallic PBR)
-- **Optimization:** Instanced wheel geometry for a lightweight mesh
+
+**Modeling Process:**
+| Component | Primitive Used |
+|-----------|----------------|
+| Legs | Cylinders |
+| Wheel Axles | Cylinders |
+| Frame Rails | Cubes |
+| Cross-braces | Cubes |
+| Mattress Surface | Subdivided Plane |
+
+**Design:** Standard hospital stretcher dimensions with adjustable backrest geometry
+
+**Materials:**
+| Component | Material | Shader Type |
+|-----------|----------|-------------|
+| Mattress | Orange Vinyl | Rough Diffuse |
+| Frame | Stainless Steel | Metallic PBR |
+
+**Optimization:** Instanced wheel geometry for a lightweight mesh
 
 ### 3. Hospital Reception Desk
-- **Modeling:** Circular arc extruded along the Z-axis with a beveled top (2 m radius)
-- **Texture:** Wood-grain texture (1K albedo + roughness + normal) via smart UV unwrapping
-- **Typography:** Embossed "Welcome" text using Blender's text-to-mesh workflow
+
+**Modeling Process:**
+- Circular arc extruded along the Z-axis
+- Beveled top (radius 2 m) to accommodate multiple staff positions
+- Embossed "Welcome" text using Blender's text-to-mesh workflow
+
+**Texturing:**
+- Wood-grain texture (1K albedo + roughness + normal)
+- Smart UV unwrapping
+- Typography integration
 
 ---
 
 ## 🧍 Character System
 
 ### Character Archetypes
-1. **Receptionist** — male, dark business suit with tie
-2. **Paramedic** — white hazmat-style jumpsuit, blue gloves, medical vest
-3. **Patient** — white shirt and dark trousers (civilian casualty)
+
+| Character | Description | Attire |
+|-----------|-------------|--------|
+| **Receptionist** | Male, professional | Dark business suit with tie |
+| **Paramedic** | Emergency responder | White hazmat-style jumpsuit, blue gloves, medical vest |
+| **Patient** | Civilian casualty | White shirt, dark trousers |
 
 ### Rigging System
-- **Skeleton:** Full humanoid armature, 65 bones including finger chains and facial control bones
+
+**Skeleton Structure:**
+- Full humanoid armature
+- **65 bones** including finger chains and facial control bones
 - **Spine hierarchy:** root → pelvis → spine1–3 → neck → head chain
-- **IK constraints:** Applied to wrists and ankles for realistic grip and foot placement
-- **Source:** Base meshes from Mixamo, refined and rigged in Blender
+
+**IK Constraints Applied:**
+- Wrists: For realistic grip on equipment and stretcher
+- Ankles: For proper foot placement on terrain
+- Elbows: For natural arm bending during CPR
+- Knees: For natural leg bending during kneeling
+
+**Source:** Base meshes from Mixamo, refined and rigged in Blender
 
 ### Animations Created
-| Animation | Description |
-|-----------|--------------|
-| **Phone Call** | Receptionist holds receiver to ear with natural arm position and subtle body sway |
-| **Stretcher Push** | Paramedic pushes loaded stretcher with a walking cycle synchronized to forward motion |
-| **Patient Lying** | Supine rest pose on stretcher with arms resting on chest |
-| **Triage Crouch** | Paramedic crouches beside fallen patient using lower-body IK |
-| **Walking** | Bystander walk cycle with natural arm swing and gait |
+
+| Animation | Character | Description | IK Application |
+|-----------|-----------|-------------|----------------|
+| **Phone Call** | Receptionist | Holds receiver to ear with natural arm position and subtle body sway | Wrist IK to phone position |
+| **CPR Compressions** | Paramedic | Kneels over fallen patient performing rhythmic chest-compression motion | Hand IK to patient's chest, elbow lock |
+| **Stretcher Push** | Paramedic | Pushes loaded stretcher with walking cycle synchronized to forward motion | Hand IK to stretcher handle, foot IK to ground |
+| **Patient Lying** | Patient | Supine rest pose on stretcher with arms resting on chest | Full body rest pose |
+| **Walking** | Bystander | Walk cycle with natural arm swing and gait | Foot IK for ground contact |
+
+### Animation Keyframes
+
+| Animation | Duration | Keyframes | Sync Rate |
+|-----------|----------|-----------|-----------|
+| Phone Call | 5 seconds | 150 frames | 30 fps |
+| CPR Cycle | 2 seconds | 60 frames | 30 fps |
+| Stretcher Push | 8 seconds | 240 frames | 30 fps |
+| Walking Cycle | 2 seconds | 60 frames | 30 fps |
 
 ---
 
-## 🎬 Emergency Scenarios
+## 🎬 Emergency Response Sequence
 
-Three scenarios were implemented, satisfying the requirement of ⌈6/2⌉ = 3 scenarios for a six-person team.
+The simulation follows a linear emergency response sequence with four distinct phases, satisfying the requirement of ⌈6/2⌉ = 3 scenarios for a six-person team.
 
-### Scenario 1: Traffic Collision and On-Scene Response 🚗💥
-A black classic car collides with a stopped vehicle at a fog-covered night intersection.
-- **Physics:** Rigid-body simulation with vehicle tipping onto its side
-- **Visual effects:** Dynamic headlight and street-lamp lighting, dramatic shadows
-- **Response:** Ambulance arrival, scene assessment, and patient extraction
-- **Atmosphere:** Volumetric fog with particle-based rain and debris
+### Phase 1: Car Crash 🚗💥
 
-<div align="center">
-  <img src="./assets/screenshots/scenario-1-collision.jpg" alt="Scenario 1 Preview" width="800"/>
-  <br>
-  <sub><i>Traffic Collision and On-Scene Response</i></sub>
-</div>
+A traffic collision occurs at a fog-covered night intersection. An SUV impacts a stationary vehicle, triggering debris particles and volumetric fog.
 
-### Scenario 2: Patient Evacuation by Stretcher 🏥🚑
-Following the collision, the patient is loaded onto the stretcher and transported to the waiting ambulance.
-- **Character-object interaction:** Paramedic's hands constrained to the stretcher handle via IK targets
-- **Animation sync:** Stretcher movement timed to match the paramedic's walking pace
-- **Detail:** Ambulance rear doors remain open, showcasing interior modeling
+**Technical Implementation:**
 
-<div align="center">
-  <img src="./assets/screenshots/scenario-2-ambulance.jpg" alt="Scenario 2 Preview" width="800"/>
-  <br>
-  <sub><i>Patient Evacuation by Stretcher</i></sub>
-</div>
+| Parameter | Value |
+|-----------|-------|
+| Physics Engine | Blender Rigid Body |
+| Simulation Rate | 60 fps |
+| Vehicle Mass | 1,800 kg |
+| Restitution | 0.3 |
+| Friction | 0.8 |
+| Collision Shape | Mesh |
+| Baking Duration | 250 frames |
+| Baking Cache | Visual Transform |
 
-### Scenario 3: Hospital Arrival and Fire Emergency 🏨🔥
-The ambulance arrives at the hospital, completing the emergency response chain, in two phases.
+**Effects Applied:**
+- Particle-based debris (3,000 particles)
+- Volumetric fog (Volume Scatter node)
+- Dynamic headlight illumination
+- Street-lamp lighting
+- Dramatic shadows
 
-**Phase 1 — Hospital Arrival & Patient Handover**
-- Ambulance pulls up to the hospital entrance with emergency lights flashing
-- Paramedics unload the stretcher and wheel the patient into reception
-- Receptionist interacts at the curved wooden desk during handover to hospital staff
+### Phase 2: Emergency Call at Hospital Reception 📞
 
-**Phase 2 — Fire Emergency Overlay**
-- A fire-alarm scenario triggers inside the hospital
-- Bright red volumetric lighting floods the interior, simulating an active building fire
-- Particle-based fire spreads across the roof
-- A second ambulance is dispatched to the new emergency outside the burning building
+Simultaneously, inside the hospital reception, the receptionist answers the emergency call.
 
-<div align="center">
-  <img src="./assets/screenshots/scenario-3-fire-emergency.jpg" alt="Scenario 3 Preview" width="800"/>
-  <br>
-  <sub><i>Hospital Arrival and Fire Emergency</i></sub>
-</div>
+**Technical Implementation:**
+
+| Element | Description |
+|---------|-------------|
+| Animation | Phone-call with natural arm position and subtle body sway |
+| Duration | 10 seconds |
+| Props | Monitors, keyboard, CAUTION: WET FLOOR sign, wheelchair |
+| Signage | ICU, Emergency Department, Radiology |
+| Environment | Curved wooden desk, terrazzo flooring, glass partitions |
+
+### Phase 3: CPR at the Scene 🚑
+
+Following the collision, a paramedic kneels beside the fallen patient and performs cardiopulmonary resuscitation (CPR).
+
+**Technical Implementation:**
+
+| Element | Description |
+|---------|-------------|
+| Animation | Rhythmic chest-compression cycle |
+| Keyframes | 60 frames per 2-second cycle |
+| IK Setup | Paramedic's hands constrained to patient's chest |
+| Compression Depth | ~5 cm (visual) |
+| Compression Rate | ~100-120 compressions per minute |
+| Patient Position | Supine with arms resting on chest |
+
+### Phase 4: Ambulance Arrives at Hospital 🏨
+
+The ambulance arrives at the hospital entrance with emergency lights flashing, completing the emergency response chain.
+
+**Technical Implementation:**
+
+| Element | Description |
+|---------|-------------|
+| Lighting | Emissive shader nodes (alternating red and blue) |
+| Reflection Type | Ray-traced coloured streaks |
+| Surfaces | Wet asphalt, glass façade |
+| Character Interaction | Paramedic pushes loaded stretcher |
+| Walk Sync | Walking cycle synchronised to forward motion |
+| Duration | 15 seconds |
 
 ---
 
@@ -201,79 +313,147 @@ The ambulance arrives at the hospital, completing the emergency response chain, 
 
 All scenes were rendered using Blender's Cycles path-tracing engine with high-quality settings.
 
+### Light Types
+
 | Light Type | Application | Technical Details |
 |------------|-------------|---------------------|
-| **Sun (Directional)** | Daytime outdoor scenes | Intensity 1.0, angle 0.5° for sharp shadows |
-| **Point Lights** | Street-lamp illumination | ~2800K color temperature, 0.3 m radius, warm white |
+| **Sun (Directional)** | Outdoor shadows | Intensity 1.0, angle 0.5° |
+| **Point Lights** | Street-lamp illumination | 2800K color temp, 0.3m radius, warm white |
 | **Spotlights** | Ambulance headlamps, rear floodlight | 30° cut-off, 5° penumbra |
 | **Emission Materials** | Light-bar LEDs, neon signs | Self-illumination with controlled intensity |
-| **Volumetric Lighting** | Fire/alarm scenes | Red Volume Scatter medium inside the building |
+| **Volumetric Scatter** | Fog for night-time accident site | Volume Scatter node in world shader |
+
+### Lighting Scenes
+
+| Scene | Light Sources | Color Temperature | Purpose |
+|-------|--------------|-------------------|---------|
+| Urban Day | Sun, Ambient | 6500K | Natural daylight |
+| Urban Night | Point (street lamps), Ambient | 2800K | Warm night atmosphere |
+| Accident Site | Point, Spot, Volumetric | 2800K-3200K | Dramatic emergency lighting |
+| Hospital Interior | Point, Ambient | 3500K | Indoor professional lighting |
+| Hospital Arrival | Emission (light-bar), Spot | Mixed | Dynamic emergency lighting |
+
+### Rendering Settings
+
+| Parameter | Setting |
+|-----------|---------|
+| Engine | Cycles |
+| Samples | 256 (adaptive) |
+| Denoiser | OptiX AI |
+| Resolution | 1920×1080 |
+| Motion Blur | 180° shutter, strength 0.5 |
+| Render Time | ~30 minutes per frame (GPU) |
 
 ---
 
 ## 🔬 Physics & Simulations
 
 ### Vehicle Impact Dynamics
-- **Engine:** Blender rigid-body system, 60 fps simulation rate
-- **Vehicle mass:** 1,800 kg | **Restitution:** 0.3 | **Friction:** 0.8
-- **Collision shape:** Mesh
-- **Baking:** 250 frames, cached as Visual Transform
+
+| Parameter | Value | Description |
+|-----------|-------|-------------|
+| Engine | Blender Rigid Body | Physics simulation engine |
+| Simulation Rate | 60 fps | Frames per second |
+| Vehicle Mass | 1,800 kg | SUV weight |
+| Restitution | 0.3 | Bounce coefficient |
+| Friction | 0.8 | Surface friction |
+| Collision Shape | Mesh | Detailed collision geometry |
+| Baking Duration | 250 frames | Simulation duration |
+| Caching | Visual Transform | For artistic control |
 
 ### Atmospheric Weather Particles
-- **Rain system:** 50,000 elongated mesh instances (scale 0.02)
-- **Force fields:** −Y world-space with randomized turbulence (strength 1.5)
-- **Debris system:** 3,000 spark/debris objects with high-velocity initial burst and drag
 
-### Fire Particle System (Scenario 3)
-- **Emitter:** Hospital roof surface
-- **Particle count:** 5,000+
-- **Motion:** Upward convection with turbulence
-- **Visual:** Orange-red emissive materials with glow, synchronized with red volumetric lighting
+**Rain System:**
+| Parameter | Value |
+|-----------|-------|
+| Particle Count | 50,000 |
+| Geometry | Elongated icospheres |
+| Scale | 0.02 |
+| Force Field | -Y direction |
+| Turbulence | Strength 1.5 |
+| Wind | Randomized |
+
+**Debris System:**
+| Parameter | Value |
+|-----------|-------|
+| Particle Count | 3,000 |
+| Geometry | Spark/fragment objects |
+| Initial Burst | High velocity |
+| Drag | Moderate |
+| Visual | Flying glass and fragments |
+
+### Fire Particle System (Optional)
+
+| Parameter | Value |
+|-----------|-------|
+| Emitter | Hospital roof surface |
+| Particle Count | 5,000+ |
+| Motion | Upward convection |
+| Turbulence | Strong |
+| Visual | Orange-red emissive materials |
+| Lighting | Red volumetric lighting |
+
+---
+
+## 🔄 Object Interaction & Collision
+
+### Character Path Navigation
+
+- **Method:** Follow Path constraints linked to Bézier curves
+- **Paths:** Pavements, ramps, and corridors
+- **Avoidance:** Implicit obstacle avoidance (no full navigation mesh)
+- **Movement:** Characters move through environment (not in-place)
+
+### Rigid-Body Vehicle Collision
+
+- **Active Body:** SUV (Rigid Body - Active)
+- **Collision Shape:** Mesh
+- **Passive Body:** Road surface
+- **Keyframed Impulse:** Frame 60
+- **Baking:** 250 frames
+- **Cache:** Visual Transform for artistic control
+
+### Stretcher-Character Interaction
+
+| Constraint Type | Application | Purpose |
+|-----------------|-------------|---------|
+| Copy Location | Hand bones to stretcher frame | Hands follow stretcher |
+| Damped Track | Hand bones to stretcher handle | Hands oriented to grip |
+| IK Constraint | Wrists to hand empties | Natural arm bending |
+| Parent | Hand empties to stretcher | Maintain grip position |
+
+### Collision Types Implemented
+
+| Collision Type | Objects | Method |
+|----------------|---------|--------|
+| Vehicle-Road | SUV, Road | Rigid Body Physics |
+| Vehicle-Vehicle | SUV, Stationary Car | Rigid Body Physics |
+| Character-Ground | Characters, Ground | IK constraints |
+| Character-Stretcher | Paramedic, Stretcher | Copy Location constraints |
+| Object-Environment | Stretcher, Hospital | Manual path placement |
 
 ---
 
 ## 🎙️ Audio & Narration
 
-A scripted voice-over narration accompanies the final demonstration video, guiding the viewer through each scenario and explaining the technical features on display (environment, hero objects, character animation, lighting, and physics). Narration was recorded and synced during the final editing pass.
+A scripted voice-over narration accompanies the final demonstration video, guiding the viewer through each phase of the emergency response sequence.
 
----
+**Narration Structure:**
 
-## 🛠️ Installation & Setup
+| Phase | Content |
+|-------|---------|
+| Introduction | Project overview, objectives |
+| Phase 1 | Car crash, physics simulation, debris |
+| Phase 2 | Emergency call, hospital reception |
+| Phase 3 | CPR, paramedic animation, IK system |
+| Phase 4 | Ambulance arrival, reflective lighting |
+| Conclusion | Summary, future work |
 
-### Prerequisites
-- **Blender 3.x** or higher ([Download](https://www.blender.org/download/))
-- **System requirements:** 8GB+ RAM, GPU with CUDA support recommended for Cycles rendering
-
-### Setup Instructions
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/virtual-ambulance-simulation.git
-   cd virtual-ambulance-simulation
-   ```
-2. **Open Blender** and launch Blender 3.x or higher.
-3. **Load the project:** open `assets/models/main_scene.blend`, or navigate to individual scenario files in `assets/animations/`.
-4. **Configure render settings:** Render Properties → select Cycles → set samples (256 recommended for final render) → enable OptiX AI Denoiser.
-5. **Render the animation:** Output Properties → set output format (FFmpeg video or image sequence) → Render → Render Animation (F12).
-
-### Quick Render Tips
-- For preview renders, reduce samples to 64–128
-- Enable adaptive sampling for faster rendering
-- Use denoising to reduce noise with fewer samples
-- Render as an image sequence for easier error recovery
-
----
-
-## 📦 Asset Credits
-
-| Asset | Source | License |
-|-------|--------|---------|
-| City Building Pack | Sketchfab | CC-BY 4.0 |
-| Street Furniture | BlenderKit | Free Tier |
-| Character Base Meshes | Mixamo | Adobe EULA |
-| Ambulance Textures | Textures.com | Standard |
-| Tree Foliage | Botaniq (Lite) | GPL |
-
-All hero objects (ambulance, stretcher, reception desk) were modeled entirely by team members.
+**Audio Specifications:**
+- Format: MP3
+- Bitrate: 192 kbps
+- Sample Rate: 44.1 kHz
+- Channels: Stereo
 
 ---
 
@@ -282,41 +462,54 @@ All hero objects (ambulance, stretcher, reception desk) were modeled entirely by
 In compliance with the course AI usage policy:
 
 | Tool | Purpose | Implementation |
-|------|---------|------------------|
-| **ChatGPT 4o** | Script generation for ambulance light-bar flicker animation; documentation assistance for this report | Generated Python drivers were reviewed and modified by the team |
-| **Midjourney v6** | Reference mood board for scene color grading and lighting | Inspiration only — no AI-generated images used in final renders |
+|------|---------|----------------|
+| **ChatGPT 4o** | Script generation | Generated Python drivers for ambulance light-bar flicker animation; documentation assistance for this report. All generated scripts were reviewed and modified by the team. |
+| **Midjourney v6** | Reference mood board | Used for scene color grading and lighting direction inspiration. No AI-generated images used in final renders. |
 
-All creative modeling, rigging, animation, and rendering work was performed manually by team members in Blender, ensuring original artistic contribution.
-
----
-
-## 🔮 Future Enhancements
-
-| Enhancement | Description |
-|--------------|---------------|
-| **Interactive User Control** | Game engine integration (Unreal Engine or Godot) |
-| **Patient Vital Signs** | Real-time monitoring with medical parameter visualization |
-| **Branching Scenarios** | Multiple response paths for training purposes |
-| **Multiplayer Support** | Team training with multiple simultaneous responders |
-| **VR/AR Integration** | Immersive training with head-mounted displays |
-| **Performance Analytics** | Metrics collection for training assessment |
-| **Medical Equipment Interaction** | Detailed simulation of medical devices and procedures |
+**Compliance Statement:** All creative modeling, rigging, animation, and rendering work was performed manually by team members in Blender, ensuring original artistic contribution.
 
 ---
 
-## 📄 License
+## 📦 Asset Credits
 
-This project is developed for educational purposes as part of the Computer Graphics and Visualization course (SBEG353/SBES140).
+| Category | Asset | Source | License |
+|----------|-------|--------|---------|
+| Environment | City building pack | Sketchfab | CC-BY 4.0 |
+| Environment | Street furniture | BlenderKit | Free Tier |
+| Environment | Tree foliage | Botaniq (Lite) | GPL |
+| Characters | Character base meshes | Mixamo | Adobe EULA |
+| Vehicles | Ambulance textures | Textures.com | Standard |
+
+**Hero Objects (Team Created):**
+- Ambulance Vehicle
+- Medical Stretcher
+- Hospital Reception Desk
 
 ---
 
-## 📚 References
+## 🛠️ Installation & Setup
 
-1. Caballero, A. R., & Niguidula, J. D. (2018). Disaster Risk Management and Emergency Preparedness: A Case-Driven Training Simulation Using Immersive Virtual Reality. *Proc. 4th Int. Conf. HCI and User Experience in Indonesia*, ACM, pp. 31–37.
-2. Lu, S., Xu, W., Wang, F., Li, X., & Yang, J. (2021). Serious Game: Confined Space Rescue Based on Virtual Reality Technology. *Proc. 2nd Int. Conf. Video, Signal and Image Processing*, ACM, pp. 66–73.
-3. Chen, Y., Fennedy, K., Zhang, J., Sim, Y. J., Zheng, C., & Yen, C. C. (2025). Bridging Simulation and Reality: Augmented Virtuality for Mass Casualty Triage Training. *Proc. CHI '25 Conf. Human Factors in Computing Systems*, ACM, Article 36.
-4. Uhl, J. C., Gutierrez, R., Regal, G., Schrom-Feiertag, H., Schuster, B., & Tscheligi, M. (2024). Choosing the Right Reality: A Comparative Analysis of Tangibility in Immersive Trauma Simulations. *Proc. CHI '24 Conf. Human Factors in Computing Systems*, ACM, Article 187.
+### Prerequisites
 
----
+- **Blender 3.x** or higher ([Download](https://www.blender.org/download/))
+- **System Requirements:** 8GB+ RAM, GPU with CUDA support recommended for Cycles rendering
+- **Git** (optional, for cloning repository)
 
-**Project Supervisor:** Dr. Mohammed Rushdi, SBEG353/SBES140
+### Quick Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/virtual-ambulance-simulation.git
+cd virtual-ambulance-simulation
+
+# Open Blender and load the project
+blender assets/models/main_scene.blend
+
+# Configure render settings:
+# 1. Render Properties → Cycles
+# 2. Samples: 256 (adaptive)
+# 3. OptiX AI Denoiser: Enabled
+
+# Render animation:
+# Output Properties → FFmpeg video or image sequence
+# Render → Render Animation (F12)
