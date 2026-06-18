@@ -5,7 +5,7 @@
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 - [Project Overview](#-project-overview)
 - [Team Members](#-team-members)
@@ -26,7 +26,7 @@
 
 ---
 
-## 📋 Project Overview
+##  Project Overview
 
 **Virtual Ambulance Emergency Response Simulation** is a comprehensive 3D visualization project that models a complete urban emergency medical response workflow. The simulation follows a chronological emergency response sequence:
 
@@ -39,7 +39,7 @@ The project demonstrates practical application of core computer graphics concept
 
 ---
 
-## 👥 Team Members
+##  Team Members
 
 The team consists of **six members**. In line with the course's requirement that workload scale with team size, responsibilities were divided so that each member owns one end-to-end area of the project.
 
@@ -54,7 +54,7 @@ The team consists of **six members**. In line with the course's requirement that
 
 ---
 
-## ⚙️ Technical Specifications
+##  Technical Specifications
 
 | Category | Specification |
 |----------|----------------|
@@ -71,7 +71,7 @@ The team consists of **six members**. In line with the course's requirement that
 
 ---
 
-## 🌆 Virtual Environment
+##  Virtual Environment
 
 ### Urban Street and City Block
 
@@ -129,7 +129,7 @@ A night-time urban intersection serves as the accident site, chosen for dramatic
 
 ---
 
-## 🚑 Hero Objects
+##  Hero Objects
 
 Per the project specification, a team of six requires **three hero objects** (⌈6/2⌉ = 3), modeled entirely from scratch by the team.
 
@@ -189,7 +189,7 @@ Per the project specification, a team of six requires **three hero objects** (�
 
 ---
 
-## 🧍 Character System
+##  Character System
 
 ### Character Archetypes
 
@@ -235,11 +235,11 @@ Per the project specification, a team of six requires **three hero objects** (�
 
 ---
 
-## 🎬 Emergency Response Sequence
+##  Emergency Response Sequence
 
 The simulation follows a linear emergency response sequence with four distinct phases, satisfying the requirement of ⌈6/2⌉ = 3 scenarios for a six-person team.
 
-### Phase 1: Car Crash 🚗💥
+### Phase 1: Car Crash 
 
 A traffic collision occurs at a fog-covered night intersection. An SUV impacts a stationary vehicle, triggering debris particles and volumetric fog.
 
@@ -263,7 +263,7 @@ A traffic collision occurs at a fog-covered night intersection. An SUV impacts a
 - Street-lamp lighting
 - Dramatic shadows
 
-### Phase 2: Emergency Call at Hospital Reception 📞
+### Phase 2: Emergency Call at Hospital Reception 
 
 Simultaneously, inside the hospital reception, the receptionist answers the emergency call.
 
@@ -277,7 +277,7 @@ Simultaneously, inside the hospital reception, the receptionist answers the emer
 | Signage | ICU, Emergency Department, Radiology |
 | Environment | Curved wooden desk, terrazzo flooring, glass partitions |
 
-### Phase 3: CPR at the Scene 🚑
+### Phase 3: CPR at the Scene 
 
 Following the collision, a paramedic kneels beside the fallen patient and performs cardiopulmonary resuscitation (CPR).
 
@@ -292,7 +292,7 @@ Following the collision, a paramedic kneels beside the fallen patient and perfor
 | Compression Rate | ~100-120 compressions per minute |
 | Patient Position | Supine with arms resting on chest |
 
-### Phase 4: Ambulance Arrives at Hospital 🏨
+### Phase 4: Ambulance Arrives at Hospital 
 
 The ambulance arrives at the hospital entrance with emergency lights flashing, completing the emergency response chain.
 
@@ -309,7 +309,7 @@ The ambulance arrives at the hospital entrance with emergency lights flashing, c
 
 ---
 
-## 💡 Lighting & Rendering
+##  Lighting & Rendering
 
 All scenes were rendered using Blender's Cycles path-tracing engine with high-quality settings.
 
