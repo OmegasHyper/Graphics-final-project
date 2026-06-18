@@ -41,16 +41,7 @@ The project demonstrates practical application of core computer graphics concept
 
 ##  Team Members
 
-The team consists of **six members**. In line with the course's requirement that workload scale with team size, responsibilities were divided so that each member owns one end-to-end area of the project.
-
-| # | Member | Contribution Area | Details |
-|---|--------|--------------------|---------|
-| 1 | **Jana Gamal Abdelzaher** | Urban Environment & Outdoor Lighting | City block, road network, and building modeling; street-lamp and directional lighting setup for all outdoor scenes; volumetric fog implementation |
-| 2 | **Maryam Hosney** | Hero Object — Ambulance Vehicle | Full modeling (box-modeling from subdivision surface), UV unwrapping, texture creation, and PBR material setup for the ambulance including livery, light bar, Star-of-Life decals, and "EMERGENCY MEDICAL SERVICES / Keep Back" text |
-| 3 | **Mohaned Hassan** | Hero Object — Stretcher & Character Rigging | Stretcher modeling from primitives (cylinders, cubes, subdivided planes); humanoid rigging for paramedic and patient characters (65 bones with IK constraints); stretcher-push animation |
-| 4 | **Hamdy** | Hospital Interior, Receptionist Animation & Voice-Over | Hero object — reception desk (curved wooden desk with embossed "Welcome" text); hospital interior modeling with signage, monitors, and props; receptionist phone-call animation; voice-over narration for the final demonstration video |
-| 5 | **Kareem Fareed** | Physics Simulation | Rigid-body vehicle collision dynamics for the traffic accident (1800kg mass, 0.3 restitution, 0.8 friction); rain particle system (50,000 particles) and debris system (3,000 particles) for atmospheric weather effects |
-| 6 | **Mohammed Abdelrazek** | Rendering & Post-Production | Cycles render configuration and optimization (256 samples, OptiX AI denoising, 1920×1080 resolution); compositing; final video editing and export |
+<img width="336" height="557" alt="image" src="https://github.com/user-attachments/assets/4e15fd05-ee5b-4c8a-96ca-98d978f640d5" />
 
 ---
 
